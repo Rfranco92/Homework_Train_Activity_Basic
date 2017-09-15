@@ -18,7 +18,7 @@
     $("#add-train").on("click", function(event) {
       event.preventDefault();
 
-      // Grabbed values from text boxes
+      // Grabbed values from text boxes and put in an array
       var name = $("#name-input").val().trim();
       var destination = $("#destination-input").val().trim();
       var time = $("#time-input").val().trim();
@@ -43,7 +43,7 @@
 
     // Firebase watcher + initial loader + order/limit HINT: .on("child_added"
       database.ref().on("child_added", function(childSnapshot, prevChildKey) {
-      // storing the snapshot.val() in a variable for convenience
+      // storing the childsnapshot.val() in a variable for convenience
       var sv = childSnapshot.val();
 
       // Console.loging the last user's data
@@ -52,7 +52,7 @@
       console.log(sv.frequency);
       console.log(sv.time);
 
-
+      // Converting time variable into time
     var timeConverted = moment(sv.time, "hh:mm").subtract(1, "years");
     console.log(timeConverted);
 
@@ -68,7 +68,7 @@
     var tRemainder = diffTime % sv.frequency;
     console.log(tRemainder);
 
-    // Minute Until Train
+    // Minutes Until Train
     var tMinutesTillTrain = sv.frequency - tRemainder;
     console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 
@@ -76,6 +76,8 @@
     var nextTrain = moment().add(tMinutesTillTrain, "minutes");
     console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
+
+    //Appending Table to include the appropriate items.
     $("#trainschedule > tbody").append("<tr><td>" + sv.name + "</td><td>" + sv.destination + "</td><td>" +
     sv.frequency + "</td><td>" + moment(nextTrain).format("hh:mm a") + "</td><td>" + tMinutesTillTrain + "</td></tr>");
 

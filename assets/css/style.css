@@ -1,0 +1,13 @@
+.jumbotron{
+	background-color: firebrick;
+	color: white;
+}
+.panel-default>.panel-heading{
+	background-color: dodgerblue;
+	color: white;
+}
+
+.btn-default{
+	background-color: dodgerblue;
+	color: white;
+}
